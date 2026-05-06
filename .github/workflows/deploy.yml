@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,22 +27,24 @@ jobs:
           bun-version: latest
 
       - name: Install Dependencies
-        run: bun install
+        run: bun ci
+        working-directory: client
 
       - name: Build Site
-        run: bun run build
+        run: bun run builder
+        working-directory: client
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: client/builder
           # Replace './dist' with the output directory of your Bun build
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     needs: build
     steps:
       - name: Deploy to GitHub Pages

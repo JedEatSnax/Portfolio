@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "builder": "bun build src/App.tsx --outdir ./builder",
     "lint": "eslint .",
     "preview": "vite preview"
   },
