@@ -31,7 +31,7 @@ jobs:
         working-directory: client
 
       - name: Build Site
-        run: bun run build
+        run: bun run builder
         working-directory: client
 
       - name: Upload Pages Artifact
