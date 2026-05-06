@@ -31,7 +31,7 @@ jobs:
         working-directory: client
 
       - name: Build Site
-        run: bun run builder
+        run: bun run build
         working-directory: client
 
       - name: Upload Pages Artifact
@@ -44,7 +44,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     needs: build
     steps:
       - name: Deploy to GitHub Pages
